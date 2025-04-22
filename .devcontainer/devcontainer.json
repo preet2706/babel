@@ -1,0 +1,38 @@
+{
+    // Name of the development environment. Please change
+    "name": "babel",
+
+    // Build configuration for the container
+    "build": {
+        // Specifies the Dockerfile to use for building the container
+        "dockerfile": "Dockerfile"
+    },
+
+    // Additional arguments to pass when running the container
+    "runArgs": [
+        // Name of the container. Please change
+        "--name", "babel",
+
+        // Enable GPU support for the container
+        "--gpus", "all"
+    ],
+
+    // Configuration for mounting the workspace
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    
+    // Specifies the folder inside the container to mount the workspace
+    "workspaceFolder": "/workspace",
+    
+    // Customizations for VS Code inside the container
+    "customizations": {
+        "vscode": {
+            // List of VS Code extensions to install in the container
+            "extensions": [
+                "ms-python.python",            // Python extension for VS Code
+                "ms-python.vscode-pylance",    // Pylance extension for Python language support
+                "ms-toolsai.jupyter",          // Jupyter support in VS Code
+                "ms-python.black-formatter"    // Black formatter for Python code
+            ]
+        }
+    }
+}
