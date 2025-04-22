@@ -9,7 +9,7 @@ from typing import *
 
 import utils
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data2")
 assert os.path.isdir(DATA_DIR)
 MM9_GTF = os.path.join(DATA_DIR, "Mus_musculus.NCBIM37.67.gtf.gz")
 assert os.path.isfile(MM9_GTF)

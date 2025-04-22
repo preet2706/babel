@@ -45,7 +45,7 @@ import adata_utils
 import plot_utils
 import utils
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data2")
 assert os.path.isdir(DATA_DIR)
 SNARESEQ_DATA_DIR = os.path.join(DATA_DIR, "snareseq_GSE126074")
 assert os.path.isdir(SNARESEQ_DATA_DIR)
