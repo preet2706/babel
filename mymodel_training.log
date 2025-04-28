@@ -1,0 +1,118 @@
+Parameter data: ['data2/lymphoma/lymph_node_lymphoma_14k_filtered_feature_bc_matrix.h5']
+Parameter snareseq: False
+Parameter shareseq: None
+Parameter nofilter: False
+Parameter linear: False
+Parameter clustermethod: leiden
+Parameter validcluster: 0
+Parameter testcluster: 1
+Parameter outdir: /workspace/babel/mymodel
+Parameter naive: False
+Parameter hidden: [16]
+Parameter pretrain: 
+Parameter lossweight: [1.33]
+Parameter optim: adam
+Parameter lr: [0.01]
+Parameter batchsize: [512]
+Parameter earlystop: 25
+Parameter seed: [182822]
+Parameter device: 0
+Parameter ext: pdf
+Reading RNA data
+Read in data2/lymphoma/lymph_node_lymphoma_14k_filtered_feature_bc_matrix.h5 for (14645, 36601) (obs x var)
+Got multiple chromosomes for gene DUS4L-BCAP29: {'7', '4'}, skipping
+36144 genes with known positions
+Filtering 14645 cells
+Remaining cells after min genes: 14184
+Remaining cells after max genes: 14128
+Computing size factors
+Found median counts of 1656.0
+Found maximum counts of 31845.0
+Log transforming data
+Normalizing data to zero mean unit variance
+Clipping to 0.5 percentile
+Constructing leiden log clustered data split with valid test cluster {'0'} {'1'}
+Setting size normalized counts
+Setting log-normalized size-normalized counts
+Created train data split with 11252 examples
+Created valid data split with 1512 examples
+Created test data split with 1364 examples
+Aggregating ATAC clusters
+Got noncanonical chromsome in GL000194.1:55987-56304
+Got noncanonical chromsome in GL000205.2:39324-39452
+Got noncanonical chromsome in GL000205.2:56235-57347
+Got noncanonical chromsome in GL000205.2:59999-60270
+Got noncanonical chromsome in GL000205.2:62155-64839
+Got noncanonical chromsome in GL000205.2:67771-69776
+Got noncanonical chromsome in GL000205.2:70531-70917
+Got noncanonical chromsome in GL000205.2:71736-71809
+Got noncanonical chromsome in GL000205.2:74088-75419
+Got noncanonical chromsome in GL000205.2:76107-76116
+Got noncanonical chromsome in GL000205.2:76874-77353
+Got noncanonical chromsome in GL000205.2:77880-79124
+Got noncanonical chromsome in GL000205.2:79851-81943
+Got noncanonical chromsome in GL000205.2:84490-84779
+Got noncanonical chromsome in GL000205.2:88829-89260
+Got noncanonical chromsome in GL000205.2:140245-141050
+Got noncanonical chromsome in GL000205.2:145479-145834
+Got noncanonical chromsome in GL000205.2:149098-149400
+Got noncanonical chromsome in GL000205.2:175289-175508
+Got noncanonical chromsome in GL000195.1:24235-24290
+Got noncanonical chromsome in GL000195.1:30297-31080
+Got noncanonical chromsome in GL000195.1:32305-32668
+Got noncanonical chromsome in GL000195.1:121003-121046
+Got noncanonical chromsome in GL000195.1:137513-138012
+Got noncanonical chromsome in GL000219.1:40048-43194
+Got noncanonical chromsome in GL000219.1:44139-46698
+Got noncanonical chromsome in GL000219.1:50875-51319
+Got noncanonical chromsome in GL000219.1:90276-90787
+Got noncanonical chromsome in GL000219.1:98907-100830
+Got noncanonical chromsome in GL000219.1:125421-125562
+Got noncanonical chromsome in GL000219.1:133115-133226
+Got noncanonical chromsome in KI270713.1:21500-22238
+Got noncanonical chromsome in GL000194.1:55987-56304
+Got noncanonical chromsome in GL000205.2:39324-39452
+Got noncanonical chromsome in GL000205.2:56235-57347
+Got noncanonical chromsome in GL000205.2:59999-60270
+Got noncanonical chromsome in GL000205.2:62155-64839
+Got noncanonical chromsome in GL000205.2:67771-69776
+Got noncanonical chromsome in GL000205.2:70531-70917
+Got noncanonical chromsome in GL000205.2:71736-71809
+Got noncanonical chromsome in GL000205.2:74088-75419
+Got noncanonical chromsome in GL000205.2:76107-76116
+Got noncanonical chromsome in GL000205.2:76874-77353
+Got noncanonical chromsome in GL000205.2:77880-79124
+Got noncanonical chromsome in GL000205.2:79851-81943
+Got noncanonical chromsome in GL000205.2:84490-84779
+Got noncanonical chromsome in GL000205.2:88829-89260
+Got noncanonical chromsome in GL000205.2:140245-141050
+Got noncanonical chromsome in GL000205.2:145479-145834
+Got noncanonical chromsome in GL000205.2:149098-149400
+Got noncanonical chromsome in GL000205.2:175289-175508
+Got noncanonical chromsome in GL000195.1:24235-24290
+Got noncanonical chromsome in GL000195.1:30297-31080
+Got noncanonical chromsome in GL000195.1:32305-32668
+Got noncanonical chromsome in GL000195.1:121003-121046
+Got noncanonical chromsome in GL000195.1:137513-138012
+Got noncanonical chromsome in GL000219.1:40048-43194
+Got noncanonical chromsome in GL000219.1:44139-46698
+Got noncanonical chromsome in GL000219.1:50875-51319
+Got noncanonical chromsome in GL000219.1:90276-90787
+Got noncanonical chromsome in GL000219.1:98907-100830
+Got noncanonical chromsome in GL000219.1:125421-125562
+Got noncanonical chromsome in GL000219.1:133115-133226
+Got noncanonical chromsome in KI270713.1:21500-22238
+Read in data2/lymphoma/lymph_node_lymphoma_14k_filtered_feature_bc_matrix.h5 for (14645, 71766) (obs x var)
+Filtering 70230 vars
+Remaining vars after min count: 69429
+Remaining vars after min cells: 69429
+Remaining vars after max cells: 53397
+Got predefined split, ignoring mode
+Created train data split with 11252 examples
+Created valid data split with 1512 examples
+Created test data split with 1364 examples
+Checking obs names for two input datasets
+Checking obs names for two input datasets
+Checking obs names for two input datasets
+Checking obs names for two input datasets
+ChromDecoder with 1 output activations
