@@ -1,3 +1,4 @@
+PyTorch CUDA version: 10.1.243
 Parameter data: ['data2/lymphoma/lymph_node_lymphoma_14k_filtered_feature_bc_matrix.h5']
 Parameter snareseq: False
 Parameter shareseq: None
@@ -116,3 +117,14 @@ Checking obs names for two input datasets
 Checking obs names for two input datasets
 Checking obs names for two input datasets
 ChromDecoder with 1 output activations
+Evaluating on test set
+Evaluating RNA > RNA
+Found pearson's correlation/p of 0.6763/0
+Found spearman's collelation/p of 0.3773/0
+Evaluating ATAC > ATAC
+Found AUROC of 0.8122
+Evaluating ATAC > RNA
+Found pearson's correlation/p of 0.6322/0
+Found spearman's collelation/p of 0.3736/0
+Evaluating RNA > ATAC
+Found AUROC of 0.7553
