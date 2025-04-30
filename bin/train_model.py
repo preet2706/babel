@@ -242,13 +242,13 @@ def main():
     )
 
     sc_rna_train_dataset = sc_data_loaders.SingleCellDatasetSplit(
-        sc_rna_dataset, split="train", data_split_by_cluster=None, data_split_by_cluster_log=False, 
+        sc_rna_dataset, split="train", 
     )
     sc_rna_valid_dataset = sc_data_loaders.SingleCellDatasetSplit(
-        sc_rna_dataset, split="valid", data_split_by_cluster=None, data_split_by_cluster_log=False,
+        sc_rna_dataset, split="valid",
     )
     sc_rna_test_dataset = sc_data_loaders.SingleCellDatasetSplit(
-        sc_rna_dataset, split="test", data_split_by_cluster=None, data_split_by_cluster_log=False,
+        sc_rna_dataset, split="test",
     )
 
     # ATAC
@@ -319,13 +319,13 @@ def main():
         predefined_split=sc_rna_dataset, **atac_data_kwargs
     )
     sc_atac_train_dataset = sc_data_loaders.SingleCellDatasetSplit(
-        sc_atac_dataset, split="train", data_split_by_cluster=None, data_split_by_cluster_log=False,
+        sc_atac_dataset, split="train",
     )
     sc_atac_valid_dataset = sc_data_loaders.SingleCellDatasetSplit(
-        sc_atac_dataset, split="valid", data_split_by_cluster=None, data_split_by_cluster_log=False,
+        sc_atac_dataset, split="valid",
     )
     sc_atac_test_dataset = sc_data_loaders.SingleCellDatasetSplit(
-        sc_atac_dataset, split="test", data_split_by_cluster=None, data_split_by_cluster_log=False,
+        sc_atac_dataset, split="test",
     )
 
     sc_dual_train_dataset = sc_data_loaders.PairedDataset(
