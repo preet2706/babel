@@ -551,9 +551,9 @@ class SingleCellDataset(Dataset):
         (train_idx, valid_idx, test_idx,) = shuffle_indices_train_valid_test(
             indices, shuffle=True, seed=1234, valid=0.15, test=0.15
         )
-        assert train_idx, "Got empty training split"
-        assert valid_idx, "Got empty validation split"
-        assert test_idx, "Got empty test split"
+        assert train_idx.size > 0, "Got empty training split"
+        assert valid_idx.size > 0, "Got empty validation split"
+        assert test_idx.size > 0, "Got empty test split"
         data_split_idx = {}
         data_split_idx["train"] = train_idx
         data_split_idx["valid"] = valid_idx
@@ -1305,10 +1305,10 @@ def euclidean_sim_matrix(mat: np.ndarray):
 
 
 def shuffle_indices_train_valid_test(
-    idx, valid: float = 0.15, test: float = 0.15, shuffle=True, seed=1234
+    idx, valid: float = 0.15, test: float = 0.15, shuffle=True, seed=1235
 ):
     """Given an array of indices, return them partitioned into train, valid, and test indices"""
-    np.random.seed(1234)  # For reproducible subsampling
+    np.random.seed(seed)  # For reproducible subsampling
     indices = np.copy(idx)  # Make a copy because shuffling occurs in place
     np.random.shuffle(indices)  # Shuffles inplace
     num_valid = int(round(len(indices) * valid)) if valid > 0 else 0
