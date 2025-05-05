@@ -211,7 +211,7 @@ class SingleCellDataset(Dataset):
         raw_adata: Union[AnnData, None] = None,  # Should be raw data
         transpose: bool = True,
         mode: str = "all",
-        data_split_by_cluster: str = "leiden",  # Specify as leiden
+        data_split_by_cluster: str = None,  # Specify as leiden
         valid_cluster_id: int = 0,  # Only used if data_split_by_cluster is on
         test_cluster_id: int = 1,
         data_split_by_cluster_log: bool = True,
@@ -432,7 +432,7 @@ class SingleCellDataset(Dataset):
             self.data_split_to_idx = copy.copy(predefined_split.data_split_to_idx)
         elif mode != "skip":
             # Create dicts mapping string to list of indices
-            if self.data_split_by_cluster:
+            if self.data_split_by_cluster is not None:
                 self.data_split_to_idx = self.__split_train_valid_test_cluster(
                     clustering_key=self.data_split_by_cluster
                     if isinstance(self.data_split_by_cluster, str)

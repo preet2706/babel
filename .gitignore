@@ -1,6 +1,7 @@
 # Ignore all files in the data directory
 data2/
-mymodel/
+mymodel*/
+
 # General
 .DS_Store
 .AppleDouble

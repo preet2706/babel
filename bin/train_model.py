@@ -91,8 +91,8 @@ def build_parser():
     parser.add_argument(
         "--clustermethod",
         type=str,
-        choices=["leiden", "louvain"],
-        default="leiden",
+        choices=["leiden", "louvain", None],
+        default=None,
         help="Clustering method to determine data splits",
     )
     parser.add_argument(
