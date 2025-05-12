@@ -1,5 +1,5 @@
 PyTorch CUDA version: 10.1.243
-Parameter data: ['data2/lymphoma/adata_6419_A.h5']
+Parameter data: ['data2/lymphoma/natalia.h5']
 Parameter snareseq: False
 Parameter shareseq: None
 Parameter nofilter: False
