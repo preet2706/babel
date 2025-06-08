@@ -151,7 +151,7 @@ TENX_PBMC_ATAC_DATA_KWARGS = {
     "transpose": False,
     "selfsupervise": True,  # Doesn't actually do anything
     "binarize": True,  # From SNAREseq paper methods section (SCALE also binarizes, uses either CE or MSE loss)
-    "autosomes_only": True,
+    "autosomes_only": False,
     "split_by_chrom": True,
     "concat_outputs": True,
     "filt_gene_min_counts": 5,  # From SNAREseq paper methods section: "peaks with fewer than five counts overall"
@@ -168,7 +168,7 @@ TENX_PBMC_ATAC_DATA_KWARGS = {
 TENX_PBMC_RNA_DATA_KWARGS = {
     "reader": functools.partial(
         utils.sc_read_multi_files,
-        reader=lambda x: utils.sc_read_10x_h5_ft_type(x, "Gene Expression"),
+        reader=lambda x: utils.sc_read_10x_h5_ft_type(x, "GEX"),
     ),
     "transpose": False,  # We do not transpose because the h5 is already cell x gene
     "gtf_file": HG38_GTF,
@@ -306,13 +306,14 @@ class SingleCellDataset(Dataset):
 
         if transpose:
             self.data_raw = self.data_raw.T
-
+        logging.info(f'Vars: {self.data_raw.n_vars} at transpose')
         # Filter out undesirable var/obs
         # self.__filter_obs_metadata(filter_samples=filter_samples)
         # self.__filter_var_metadata(filter_features=filter_features)
         self.data_raw = adata_utils.filter_adata(
             self.data_raw, filt_cells=filter_samples, filt_var=filter_features
         )
+        logging.info(f'Vars: {self.data_raw.n_vars} at filter')
 
         # Attach obs/var annotations
         if cell_info is not None:
@@ -326,7 +327,7 @@ class SingleCellDataset(Dataset):
             assert (
                 self.data_raw.shape[0] == self.data_raw.obs.shape[0]
             ), f"Got discordant shapes for data and obs: {self.data_raw.shape} {self.data_raw.obs.shape}"
-
+            logging.info(f'Vars: {self.data_raw.n_vars} at cell info')
         if gene_info is not None:
             assert isinstance(gene_info, pd.DataFrame)
             if (
@@ -340,14 +341,16 @@ class SingleCellDataset(Dataset):
             assert (
                 self.data_raw.shape[1] == self.data_raw.var.shape[0]
             ), f"Got discordant shapes for data and var: {self.data_raw.shape} {self.data_raw.var.shape}"
-
+            logging.info(f'Vars: {self.data_raw.n_vars} at gene info')
         if sort_by_pos:
             genes_reordered, chroms_reordered = reorder_genes_by_pos(
                 self.data_raw.var_names, gtf_file=gtf_file, return_chrom=True
             )
             self.data_raw = self.data_raw[:, genes_reordered]
+            logging.info(f'Vars: {self.data_raw.n_vars} at sort by pos')
 
         self.__annotate_chroms(gtf_file)
+        logging.info(f'Vars: {self.data_raw.n_vars} at anno')
         if self.autosomes_only:
             autosomal_idx = [
                 i
@@ -355,23 +358,26 @@ class SingleCellDataset(Dataset):
                 if utils.is_numeric(chrom.strip("chr"))
             ]
             self.data_raw = self.data_raw[:, autosomal_idx]
+            logging.info(f'Vars: {self.data_raw.n_vars} at autosomes only')
 
         # Sort by the observation names so we can combine datasets
         sort_order_idx = np.argsort(self.data_raw.obs_names)
         self.data_raw = self.data_raw[sort_order_idx, :]
+        logging.info(f'Vars: {self.data_raw.n_vars} at sort')
         # NOTE pooling occurs AFTER feature/observation filtering
         if pool_genomic_interval:
             self.__pool_features(pool_genomic_interval=pool_genomic_interval)
             # Re-annotate because we have lost this information
             self.__annotate_chroms(gtf_file)
-
+            logging.info(f'Vars: {self.data_raw.n_vars} at pool')
         # Preprocess the data now that we're done filtering
         if self.binarize:
             # If we are binarizing data we probably don't care about raw counts
             # self.data_raw.raw = self.data_raw.copy()  # Store original counts
             self.data_raw.X[self.data_raw.X.nonzero()] = 1  # .X here is a csr matrix
-
+        logging.info(f'Vars: {self.data_raw.n_vars} at binarize')
         adata_utils.annotate_basic_adata_metrics(self.data_raw)
+        logging.info(f'Vars: {self.data_raw.n_vars} at metrics')
         adata_utils.filter_adata_cells_and_genes(
             self.data_raw,
             filter_cell_min_counts=filt_cell_min_counts,
@@ -1465,18 +1471,27 @@ def interval_string_to_tuple(x: str) -> Tuple[str, int, int]:
     >>> interval_string_to_tuple("chr1:1e+06-1000199")
     ('chr1', 1000000, 1000199)
     """
-    tokens = x.split(":")
-    assert len(tokens) == 2, f"Malformed interval string: {x}"
-    chrom, interval = tokens
+    # tokens = x.split(":")
+    # assert len(tokens) == 2, f"Malformed interval string: {x}"
+    # chrom, interval = tokens
+    # if not chrom.startswith("chr"):
+    #     logging.warn(f"Got noncanonical chromsome in {x}")
+    # start, stop = map(float, interval.split("-"))
+    # assert start < stop, f"Got invalid interval span: {x}"
+    # return (chrom, int(start), int(stop))
+
+    tokens = x.split("-")
+    assert len(tokens) == 3, f"Malformed interval string: {x}"
+    chrom, interval_start, interval_end = tokens
     if not chrom.startswith("chr"):
         logging.warn(f"Got noncanonical chromsome in {x}")
-    start, stop = map(float, interval.split("-"))
-    assert start < stop, f"Got invalid interval span: {x}"
-    return (chrom, int(start), int(stop))
+    #start, stop = map(float, interval.split("-"))
+    assert int(interval_start) < int(interval_end), f"Got invalid interval span: {x}"
+    return (chrom, int(interval_start), int(interval_end))
 
 
 def tuple_to_interval_string(t: Tuple[str, int, int]) -> str:
-    return f"{t[0]}:{t[1]}-{t[2]}"
+    return f"{t[0]}-{t[1]}-{t[2]}"
 
 
 def interval_strings_to_itree(

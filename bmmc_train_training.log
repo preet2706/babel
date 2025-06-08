@@ -1,0 +1,113 @@
+PyTorch CUDA version: 10.1.243
+Parameter data: ['data2/bmmc/bmmc_combined.h5ad']
+Parameter snareseq: False
+Parameter shareseq: None
+Parameter nofilter: False
+Parameter linear: False
+Parameter clustermethod: None
+Parameter validcluster: 0
+Parameter testcluster: 1
+Parameter outdir: /workspace/babel/bmmc_train
+Parameter naive: False
+Parameter hidden: [16]
+Parameter pretrain: 
+Parameter lossweight: [1.33]
+Parameter optim: adam
+Parameter lr: [0.01]
+Parameter batchsize: [512]
+Parameter earlystop: 25
+Parameter seed: [182822]
+Parameter device: 0
+Parameter ext: pdf
+Reading RNA data
+Read in data2/bmmc/bmmc_combined.h5ad for (20000, 13431) (obs x var)
+Vars: 13431 at transpose
+Vars: 13431 at filter
+Got multiple chromosomes for gene DUS4L-BCAP29: {'7', '4'}, skipping
+13295 genes with known positions
+Vars: 13295 at sort by pos
+Vars: 13295 at anno
+Vars: 12857 at autosomes only
+Vars: 12857 at sort
+Vars: 12857 at binarize
+Vars: 12857 at metrics
+Filtering 20000 cells
+Remaining cells after min genes: 19984
+Remaining cells after max genes: 19984
+Computing size factors
+Found median counts of 6539.4072265625
+Found maximum counts of 27362.177734375
+Log transforming data
+Normalizing data to zero mean unit variance
+Clipping to 0.5 percentile
+Constructing all random data split - not recommended due to potential leakage between data split
+Created train data split with 13988 examples
+Created valid data split with 2998 examples
+Created test data split with 2998 examples
+Aggregating ATAC clusters
+Got noncanonical chromsome in GL000205.2-63003-63892
+Got noncanonical chromsome in GL000205.2-67850-68750
+Got noncanonical chromsome in GL000205.2-69027-69865
+Got noncanonical chromsome in GL000205.2-70459-71196
+Got noncanonical chromsome in GL000205.2-78256-79023
+Got noncanonical chromsome in GL000205.2-87627-88151
+Got noncanonical chromsome in GL000205.2-88673-89483
+Got noncanonical chromsome in GL000205.2-140307-141166
+Got noncanonical chromsome in GL000205.2-174993-175884
+Got noncanonical chromsome in GL000195.1-23722-24627
+Got noncanonical chromsome in GL000195.1-30407-31261
+Got noncanonical chromsome in GL000195.1-32211-33062
+Got noncanonical chromsome in GL000195.1-137376-138301
+Got noncanonical chromsome in GL000219.1-39933-40839
+Got noncanonical chromsome in GL000219.1-42172-43054
+Got noncanonical chromsome in GL000219.1-44703-45584
+Got noncanonical chromsome in GL000219.1-45726-46450
+Got noncanonical chromsome in GL000219.1-90062-90937
+Got noncanonical chromsome in GL000219.1-99257-100160
+Got noncanonical chromsome in KI270726.1-27152-28034
+Got noncanonical chromsome in KI270713.1-21434-22336
+Got noncanonical chromsome in KI270713.1-29629-30491
+Got noncanonical chromsome in GL000205.2-63003-63892
+Got noncanonical chromsome in GL000205.2-67850-68750
+Got noncanonical chromsome in GL000205.2-69027-69865
+Got noncanonical chromsome in GL000205.2-70459-71196
+Got noncanonical chromsome in GL000205.2-78256-79023
+Got noncanonical chromsome in GL000205.2-87627-88151
+Got noncanonical chromsome in GL000205.2-88673-89483
+Got noncanonical chromsome in GL000205.2-140307-141166
+Got noncanonical chromsome in GL000205.2-174993-175884
+Got noncanonical chromsome in GL000195.1-23722-24627
+Got noncanonical chromsome in GL000195.1-30407-31261
+Got noncanonical chromsome in GL000195.1-32211-33062
+Got noncanonical chromsome in GL000195.1-137376-138301
+Got noncanonical chromsome in GL000219.1-39933-40839
+Got noncanonical chromsome in GL000219.1-42172-43054
+Got noncanonical chromsome in GL000219.1-44703-45584
+Got noncanonical chromsome in GL000219.1-45726-46450
+Got noncanonical chromsome in GL000219.1-90062-90937
+Got noncanonical chromsome in GL000219.1-99257-100160
+Got noncanonical chromsome in KI270726.1-27152-28034
+Got noncanonical chromsome in KI270713.1-21434-22336
+Got noncanonical chromsome in KI270713.1-29629-30491
+Read in data2/bmmc/bmmc_combined.h5ad for (20000, 116490) (obs x var)
+Vars: 116490 at transpose
+Vars: 116490 at filter
+Vars: 116490 at anno
+Vars: 116490 at sort
+Vars: 116490 at binarize
+Vars: 116490 at metrics
+Filtering 116490 vars
+Remaining vars after min count: 116490
+Remaining vars after min cells: 116490
+Remaining vars after max cells: 18903
+Got predefined split, ignoring mode
+Created train data split with 13988 examples
+Created valid data split with 2998 examples
+Created test data split with 2998 examples
+Checking obs names for two input datasets
+Checking obs names for two input datasets
+Checking obs names for two input datasets
+Checking obs names for two input datasets
+Setting size normalized counts
+Setting log-normalized size-normalized counts
+ChromDecoder with 1 output activations

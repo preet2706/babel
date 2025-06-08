@@ -96,7 +96,7 @@ def get_ad_reader(fname: str, ft_type: str) -> Callable:
 
         def helper(fname, pfunc, ft_type):
             a = pfunc(fname)
-            return a[:, a.var["feature_types"] == ft_type]
+            return a[:, a.var["feature_type"] == ft_type]
 
         return functools.partial(helper, pfunc=pfunc, ft_type=ft_type)
     elif ext == "h5ad":
@@ -160,19 +160,21 @@ def sc_read_multi_files(
 
 def sc_read_10x_h5_ft_type(fname: str, ft_type: str) -> AnnData:
     """Read the h5 file, taking only features with specified ft_type"""
-    assert fname.endswith(".h5")
-    parsed = sc.read_10x_h5(fname, gex_only=False)
+    assert fname.endswith(".h5ad") or fname.endswith(".h5")
+    if fname.endswith(".h5ad"):
+        parsed = sc.read_h5ad(fname)
+    elif fname.endswith(".h5"):
+        parsed = sc.read_10x_h5(fname, gex_only=False)
     parsed.var_names_make_unique()
     assert ft_type in set(
-        parsed.var["feature_types"]
-    ), f"Given feature type {ft_type} not in included types: {set(parsed.var['feature_types'])}"
+        parsed.var["feature_type"]
+    ), f"Given feature type {ft_type} not in included types: {set(parsed.var['feature_type'])}"
 
     retval = parsed[
         :,
-        [n for n in parsed.var_names if parsed.var.loc[n, "feature_types"] == ft_type],
+        [n for n in parsed.var_names if parsed.var.loc[n, "feature_type"] == ft_type],
     ]
     return retval
-
 
 def extract_file(fname, overwrite: bool = False) -> str:
     """Extracts the file and return the path to extracted file"""

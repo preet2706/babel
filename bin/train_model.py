@@ -290,7 +290,7 @@ def main():
         atac_data_kwargs["raw_adata"] = shareseq_atac_adata
     else:
         atac_parsed = [
-            utils.sc_read_10x_h5_ft_type(fname, "Peaks") for fname in args.data
+            utils.sc_read_10x_h5_ft_type(fname, "ATAC") for fname in args.data
         ]
         if len(atac_parsed) > 1:
             atac_bins = sc_data_loaders.harmonize_atac_intervals(
@@ -310,7 +310,7 @@ def main():
         atac_data_kwargs["reader"] = functools.partial(
             utils.sc_read_multi_files,
             reader=lambda x: sc_data_loaders.repool_atac_bins(
-                utils.sc_read_10x_h5_ft_type(x, "Peaks"), atac_bins,
+                utils.sc_read_10x_h5_ft_type(x, "ATAC"), atac_bins,
             ),
         )
     atac_data_kwargs["cluster_res"] = 0  # Do not bother clustering ATAC data
